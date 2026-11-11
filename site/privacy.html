@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Wicked Brain - Privacy Policy</title><style>:root{color-scheme:light dark;--bg:#fff;--fg:#1d1a17;--mut:#6b6259;--acc:#b8431f}@media(prefers-color-scheme:dark){:root{--bg:#13100e;--fg:#f3ede6;--mut:#a89f95;--acc:#e5784b}}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:44rem;margin:0 auto;padding:2.5rem 1rem 4rem}h1{font-size:1.9rem;margin:0 0 .25rem}h2{font-size:1.15rem;margin:2rem 0 .4rem}p,li{color:var(--fg)}.m{color:var(--mut);font-size:.9rem}a{color:var(--acc)}nav{margin-bottom:1.5rem;font-size:.95rem}code{font-size:.92em}</style></head><body><main><nav><a href="index.html">Wicked Brain</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="support.html">Support</a></nav>
+<h1>Privacy Policy</h1>
+<p class="m">Wicked Brain, published by SimpliFixed Technologies, LLC. Last updated: 2026-11-11.</p>
+
+<h2>The short version</h2>
+<p>Wicked Brain runs on your computer. Your notes are plain markdown files in a folder you choose. SimpliFixed Technologies, LLC does not receive, store, or have access to your notes, and the plugin has no analytics, telemetry, advertising, or tracking.</p>
+
+<h2>What the plugin does with your data</h2>
+<ul>
+<li><strong>Notes.</strong> The plugin reads and writes markdown files in your vault folder when you or your AI assistant ask it to. They stay on your disk. You can delete or move them at any time.</li>
+<li><strong>Your AI assistant.</strong> When the assistant (for example Codex or ChatGPT) reads a note through the plugin, that text becomes part of your conversation and is handled under that provider's own privacy policy, not ours.</li>
+<li><strong>Settings.</strong> The vault location is stored in a small file on your computer, <code>~/.config/wicked-brain/.env</code>.</li>
+<li><strong>Secrets.</strong> The plugin warns when a note looks like it contains a password, key, or token. Do not store credentials in your vault.</li>
+</ul>
+
+<h2>Optional features that send data elsewhere</h2>
+<ul>
+<li><strong>Semantic search (off unless you set it up).</strong> By default it talks only to an embedding model running on your own machine (Ollama on localhost). If you point it at a hosted embedding service, the text of the notes being indexed is sent to that service under its terms.</li>
+<li><strong>Cross-device sync (off unless you set it up).</strong> Sync uploads to a server that you run. Note content is encrypted on your device before upload using a passphrase that never leaves your devices. The server stores ciphertext and note file paths (paths are not encrypted). SimpliFixed Technologies, LLC does not operate a sync service for other people.</li>
+</ul>
+
+<h2>Retention and your controls</h2>
+<p>We keep nothing, because we receive nothing. Your notes live where you put them, and you control them with your normal file tools. Uninstalling the plugin does not delete your vault.</p>
+
+<h2>Children</h2>
+<p>Wicked Brain is a developer tool and is not directed at children.</p>
+
+<h2>Changes and contact</h2>
+<p>If this policy changes, the date above changes and the new version is published at this address. Questions: <a href="mailto:support@wickedapi.com">support@wickedapi.com</a>, or open an issue at <a href="https://github.com/WickedAPI/wicked-brain/issues">github.com/WickedAPI/wicked-brain/issues</a>.</p>
+</main></body></html>

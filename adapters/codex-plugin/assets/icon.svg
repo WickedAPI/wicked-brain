@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Wicked Brain">
+  <rect width="512" height="512" rx="112" fill="#13100E"/>
+  <polyline points="104,164 180,348 256,212 332,348 408,164" fill="none" stroke="#E5784B" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#5FD0BF">
+    <circle cx="104" cy="164" r="30"/><circle cx="180" cy="348" r="30"/><circle cx="256" cy="212" r="30"/>
+    <circle cx="332" cy="348" r="30"/><circle cx="408" cy="164" r="30"/>
+  </g>
+</svg>

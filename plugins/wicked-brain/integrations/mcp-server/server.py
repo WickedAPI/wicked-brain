@@ -49,11 +49,20 @@ sys.path.insert(0, Path(__file__).parent.as_posix())
 
 import vault_ops  # noqa: E402
 from mcp.server.fastmcp import FastMCP  # noqa: E402
+from mcp.types import ToolAnnotations  # noqa: E402
 
 mcp = FastMCP("wicked-brain")
 
+# Every tool declares what it can do, so a host can show an accurate confirmation prompt.
+# All tools stay inside the user's own vault folder (never the network): openWorld is false.
+READ_ONLY = ToolAnnotations(readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False)
+# Creates a new note and refuses to overwrite an existing one.
+ADDITIVE = ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False)
+# Edits or moves an existing note.
+EDITS_EXISTING = ToolAnnotations(readOnlyHint=False, destructiveHint=True, idempotentHint=False, openWorldHint=False)
 
-@mcp.tool()
+
+@mcp.tool(annotations=READ_ONLY)
 def brain_search(query: str, limit: int = 6) -> str:
     """Search the Obsidian vault for relevant notes.
 
@@ -63,7 +72,7 @@ def brain_search(query: str, limit: int = 6) -> str:
     return json.dumps({"results": vault_ops.search(query, limit=limit)})
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_read_note(path: str, offset: int = 0, limit: int = 20_000) -> str:
     """Read a vault note by path with explicit pagination.
 
@@ -73,7 +82,7 @@ def brain_read_note(path: str, offset: int = 0, limit: int = 20_000) -> str:
     return json.dumps(vault_ops.read_note(path, offset=offset, limit=limit))
 
 
-@mcp.tool()
+@mcp.tool(annotations=ADDITIVE)
 def brain_save_note(
     title: str,
     content: str,
@@ -102,7 +111,7 @@ def brain_save_note(
     )
 
 
-@mcp.tool()
+@mcp.tool(annotations=ADDITIVE)
 def brain_capture(text: str, tags: list[str] | None = None) -> str:
     """Quick-capture an idea or thought as a lightweight note (type: idea) in the vault.
 
@@ -113,7 +122,7 @@ def brain_capture(text: str, tags: list[str] | None = None) -> str:
     return json.dumps(vault_ops.capture_idea(text, tags=tags))
 
 
-@mcp.tool()
+@mcp.tool(annotations=EDITS_EXISTING)
 def brain_update_note(
     path: str,
     append: str | None = None,
@@ -139,7 +148,7 @@ def brain_update_note(
     )
 
 
-@mcp.tool()
+@mcp.tool(annotations=EDITS_EXISTING)
 def brain_replace_text(path: str, old_text: str, new_text: str) -> str:
     """Guarded exact patch of an existing note.
 
@@ -149,7 +158,7 @@ def brain_replace_text(path: str, old_text: str, new_text: str) -> str:
     return json.dumps(vault_ops.replace_text(path, old_text, new_text))
 
 
-@mcp.tool()
+@mcp.tool(annotations=EDITS_EXISTING)
 def brain_move_note(source: str, destination: str) -> str:
     """Move a markdown note inside the vault without overwriting a destination.
 
@@ -159,7 +168,7 @@ def brain_move_note(source: str, destination: str) -> str:
     return json.dumps(vault_ops.move_note(source, destination))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_validate_note(path: str) -> str:
     """Check a note for AI-first compliance and unresolved wikilinks.
 
@@ -171,7 +180,7 @@ def brain_validate_note(path: str) -> str:
     return json.dumps(vault_ops.validate_note(path))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_backlinks(target: str) -> str:
     """List every note that links to `target` via [[wikilink]].
 
@@ -181,7 +190,7 @@ def brain_backlinks(target: str) -> str:
     return json.dumps(vault_ops.backlinks(target))
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_vault_health() -> str:
     """Bounded structural health check of the vault.
 
@@ -192,7 +201,7 @@ def brain_vault_health() -> str:
     return json.dumps(vault_ops.vault_health())
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_list_skills() -> str:
     """List the wicked-brain skills (commands) available to run.
 
@@ -203,7 +212,7 @@ def brain_list_skills() -> str:
     return json.dumps({"skills": vault_ops.list_skills()})
 
 
-@mcp.tool()
+@mcp.tool(annotations=READ_ONLY)
 def brain_get_skill(name: str) -> str:
     """Get a skill's playbook (step-by-step instructions) by name.
 

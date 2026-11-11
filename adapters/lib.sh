@@ -338,7 +338,7 @@ rewrite_platform_paths() {
 # Copies the Python toolkit AND the uv project beside it. `uv run --directory
 # <root>` needs the project to resolve both the module path and dependencies.
 #
-# Excludes build.sh, build-marketplace.sh, export-public.sh, lib.sh, and install-*.sh: these are repo-level dev/build
+# Excludes build.sh, build-marketplace.sh, export-public.sh, package-submission.sh, check_submission.py, lib.sh, and install-*.sh: these are repo-level dev/build
 # tooling that lives in this same scripts/ folder (build.sh dispatches to the
 # adapters that produce dist/, install-*.sh installs a dist/ output that
 # doesn't exist yet inside an already-built copy). A copied install-claude-code.sh
@@ -351,7 +351,7 @@ copy_scripts_with_project() {
   [[ -d "$src" ]] || return 0
   mkdir -p "$dst"
   cp -R "$src/." "$dst/"
-  rm -f "$dst"/build.sh "$dst"/build-marketplace.sh "$dst"/export-public.sh "$dst"/lib.sh "$dst"/install-*.sh
+  rm -f "$dst"/build.sh "$dst"/build-marketplace.sh "$dst"/export-public.sh "$dst"/package-submission.sh "$dst"/check_submission.py "$dst"/lib.sh "$dst"/install-*.sh
   cp "$src/../pyproject.toml" "$(dirname "$dst")/pyproject.toml"
 }
 

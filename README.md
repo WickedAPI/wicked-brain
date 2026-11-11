@@ -36,13 +36,24 @@ ten `/brain-*` commands register themselves. Then run `/brain-init` to create a 
 
 ### Codex
 
+**macOS and Linux:**
+
 ```bash
 codex plugin marketplace add WickedAPI/wicked-brain
 ```
 
-Then open the Codex app's plugin directory, install **Wicked Brain**, and run `$brain-setup`
-once to tell it where your vault is. Each command is a skill: `$brain-find`, `$brain-save`,
-`$brain-capture` and so on.
+**Windows:** the Codex CLI (0.124) cannot clone a marketplace from GitHub on Windows: it fails with
+`could not open ...\.git\HEAD for writing`. This is a Codex limitation that affects every
+repository, not just this one. Clone it yourself and add the local folder instead:
+
+```powershell
+git clone https://github.com/WickedAPI/wicked-brain $HOME\wicked-brain
+codex plugin marketplace add $HOME\wicked-brain
+```
+
+Then open the Codex app's plugin directory, install **Wicked Brain** from the `wicked-brain`
+marketplace, and run `$brain-setup` once to tell it where your vault is. Each command is a skill:
+`$brain-find`, `$brain-save`, `$brain-capture` and so on. To update later, `git pull` in your clone.
 
 Codex plugins can't run hooks yet, so on Codex there is no automatic recall or auto-sync. Run
 `$brain-find` and `$brain-sync` yourself.

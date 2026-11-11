@@ -61,7 +61,7 @@ def test_plugin_is_self_contained_and_leaves_dev_tooling_out(tree):
     assert len(list((plugin / "commands").glob("brain-*.md"))) == 10
     assert not (plugin / "INSTALL.md").exists()  # documents the developer junction install
     leaked = [p.name for p in (plugin / "scripts").iterdir()
-              if p.name in {"build.sh", "build-marketplace.sh", "export-public.sh", "lib.sh"} or p.name.startswith("install-")]
+              if p.name in {"build.sh", "build-marketplace.sh", "export-public.sh", "package-submission.sh", "check_submission.py", "lib.sh"} or p.name.startswith("install-")]
     assert leaked == []
     assert not list(tree.rglob("__pycache__"))
 
@@ -152,7 +152,7 @@ def test_public_export_leaves_out_private_files_and_passes_its_leak_scan():
         )
         assert result.returncode == 0, result.stdout + result.stderr
         for private in ("CLAUDE.md", "AGENTS.md", "HOSTING.md", ".claude", "search_test.txt",
-                        "sync_server/DEPLOYMENT.md", "scripts/export-public.sh", ".git"):
+                        "sync_server/DEPLOYMENT.md", "scripts/export-public.sh", "scripts/package-submission.sh", "scripts/check_submission.py", ".git"):
             assert not (out / private).exists(), private
         for needed in ("README.md", "LICENSE", "NOTICE.md", ".gitignore", ".gitattributes",
                        ".claude-plugin/marketplace.json", ".agents/plugins/marketplace.json",

@@ -1,6 +1,6 @@
 {
   "name": "wicked-brain",
-  "owner": { "name": "Wicked Labs", "url": "https://github.com/WickedAPI/wicked-brain" },
+  "owner": { "name": "SimpliFixed Technologies, LLC", "url": "https://github.com/WickedAPI/wicked-brain" },
   "metadata": {
     "description": "Wicked Brain: a fast, plain-markdown memory vault that Claude Code, Codex CLI and Google Antigravity share.",
     "version": "0.1.0"

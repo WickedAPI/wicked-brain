@@ -28,6 +28,9 @@ CP_PLATFORM="codex-plugin"
 CP_VERSION="$(sed -n 's/^version *= *"\([^"]*\)".*/\1/p' "${BASH_SOURCE[0]%/*}/../../pyproject.toml" | head -n1)"
 CP_VERSION="${CP_VERSION:-0.0.0}"
 CP_REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/WickedAPI/wicked-brain}"
+# Where the privacy, terms and support pages (site/*.html) are served. Must be public HTTPS before submitting.
+CP_SITE_URL="${WICKED_BRAIN_SITE_URL:-https://brain.wickedlabs.gg}"
+CP_ASSETS_DIR="$(cd "${BASH_SOURCE[0]%/*}" && pwd)/assets"
 CP_ROOT_NOTE='> **Plugin root.** This skill ships inside the Wicked Brain plugin. `<plugin-root>` means the folder two levels above this `SKILL.md` (the folder that contains `skills/`, `references/` and `scripts/`). Resolve every `<plugin-root>/...` path below from this file'"'"'s own location. The vault itself is wherever `WICKED_BRAIN_VAULT_PATH` (or `~/.config/wicked-brain/.env`) points; if neither is set, run `$brain-setup` first.'
 
 adapter_build() {
@@ -40,6 +43,7 @@ adapter_build() {
   _cp_plugin_root_rewrite_tree "$dst/references"
   copy_scripts_with_project "$src/scripts" "$dst/scripts"
   _cp_copy_mcp_server "$src" "$dst"
+  mkdir -p "$dst/assets" && cp "$CP_ASSETS_DIR"/* "$dst/assets/"
   _cp_emit_manifests "$dst"
   _cp_emit_mcp_json "$dst"
   _cp_emit_readme "$dst"
@@ -181,7 +185,7 @@ _cp_emit_manifests() {
   "name": "wicked-brain",
   "version": "$CP_VERSION",
   "description": "$desc",
-  "author": { "name": "Wicked Brain", "url": "$CP_REPO_URL" },
+  "author": { "name": "SimpliFixed Technologies, LLC", "url": "$CP_REPO_URL" },
   "homepage": "$CP_REPO_URL",
   "repository": "$CP_REPO_URL",
   "license": "MIT",
@@ -192,12 +196,18 @@ _cp_emit_manifests() {
       "onboardingSkill": "./skills/brain-setup/SKILL.md",
       "interface": {
         "displayName": "Wicked Brain",
-        "shortDescription": "A plain-markdown memory vault for your agents",
-        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that Claude Code, Codex and Antigravity can all share. Runs entirely on your machine; optional end-to-end-encrypted sync.",
-        "developerName": "Wicked Brain",
+        "shortDescription": "Memory vault for your agents",
+        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that Claude Code, Codex and Antigravity can all share. Runs entirely on your machine, with no account and no telemetry. Needs the free uv tool installed. Optional end-to-end-encrypted sync to a server you run.",
+        "developerName": "SimpliFixed Technologies, LLC",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],
-        "websiteURL": "$CP_REPO_URL",
+        "brandColor": "#B8431F",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg",
+        "websiteURL": "$CP_SITE_URL/",
+        "privacyPolicyURL": "$CP_SITE_URL/privacy.html",
+        "termsOfServiceURL": "$CP_SITE_URL/terms.html",
+        "supportURL": "$CP_SITE_URL/support.html",
         "defaultPrompt": [
           "Set up Wicked Brain with my vault.",
           "What do we know about this project?",
@@ -222,7 +232,7 @@ EOF
   "requires_local_executor": true,
   "interface": {
     "displayName": "Wicked Brain",
-    "shortDescription": "A plain-markdown memory vault for your agents",
+    "shortDescription": "Memory vault for your agents",
     "category": "Productivity",
     "capabilities": ["Read", "Write"]
   }
