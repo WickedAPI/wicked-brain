@@ -1,6 +1,6 @@
 {
   "name": "wicked-brain",
-  "owner": { "name": "Wicked Labs", "url": "https://github.com/choaticpixels/wicked-brain" },
+  "owner": { "name": "Wicked Labs", "url": "https://github.com/WickedAPI/wicked-brain" },
   "metadata": {
     "description": "Wicked Brain: a fast, plain-markdown memory vault that Claude Code, Codex CLI and Google Antigravity share.",
     "version": "0.1.0"
@@ -13,7 +13,7 @@
       "version": "0.1.0",
       "category": "productivity",
       "tags": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
-      "homepage": "https://github.com/choaticpixels/wicked-brain"
+      "homepage": "https://github.com/WickedAPI/wicked-brain"
     }
   ]
 }

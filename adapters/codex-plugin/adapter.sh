@@ -27,7 +27,7 @@
 CP_PLATFORM="codex-plugin"
 CP_VERSION="$(sed -n 's/^version *= *"\([^"]*\)".*/\1/p' "${BASH_SOURCE[0]%/*}/../../pyproject.toml" | head -n1)"
 CP_VERSION="${CP_VERSION:-0.0.0}"
-CP_REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/choaticpixels/wicked-brain}"
+CP_REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/WickedAPI/wicked-brain}"
 CP_ROOT_NOTE='> **Plugin root.** This skill ships inside the Wicked Brain plugin. `<plugin-root>` means the folder two levels above this `SKILL.md` (the folder that contains `skills/`, `references/` and `scripts/`). Resolve every `<plugin-root>/...` path below from this file'"'"'s own location. The vault itself is wherever `WICKED_BRAIN_VAULT_PATH` (or `~/.config/wicked-brain/.env`) points; if neither is set, run `$brain-setup` first.'
 
 adapter_build() {

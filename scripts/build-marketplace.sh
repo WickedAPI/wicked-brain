@@ -29,7 +29,7 @@ source "$SCRIPT_DIR/lib.sh"
 
 OUT="${1:-$REPO_ROOT/dist/marketplace}"
 MARKETPLACE_NAME="${WICKED_BRAIN_MARKETPLACE_NAME:-wicked-brain}"
-REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/choaticpixels/wicked-brain}"
+REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/WickedAPI/wicked-brain}"
 OWNER_NAME="${WICKED_BRAIN_OWNER_NAME:-Wicked Labs}"
 
 VERSION="$(sed -n 's/^version *= *"\([^"]*\)".*/\1/p' "$REPO_ROOT/pyproject.toml" | head -n1)"

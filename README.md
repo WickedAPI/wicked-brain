@@ -1,6 +1,6 @@
 # Wicked Brain
 
-[![tests](https://github.com/choaticpixels/wicked-brain/actions/workflows/tests.yml/badge.svg)](https://github.com/choaticpixels/wicked-brain/actions/workflows/tests.yml)
+[![tests](https://github.com/WickedAPI/wicked-brain/actions/workflows/tests.yml/badge.svg)](https://github.com/WickedAPI/wicked-brain/actions/workflows/tests.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **One memory for every AI coding agent.** Wicked Brain is a plain-markdown vault that
@@ -26,7 +26,7 @@ use Git Bash, which comes with [Git for Windows](https://git-scm.com/download/wi
 ### Claude Code
 
 ```bash
-claude plugin marketplace add choaticpixels/wicked-brain
+claude plugin marketplace add WickedAPI/wicked-brain
 claude plugin install wicked-brain@wicked-brain
 ```
 
@@ -37,7 +37,7 @@ ten `/brain-*` commands register themselves. Then run `/brain-init` to create a 
 ### Codex
 
 ```bash
-codex plugin marketplace add choaticpixels/wicked-brain
+codex plugin marketplace add WickedAPI/wicked-brain
 ```
 
 Then open the Codex app's plugin directory, install **Wicked Brain**, and run `$brain-setup`
@@ -50,7 +50,7 @@ Codex plugins can't run hooks yet, so on Codex there is no automatic recall or a
 ### Google Antigravity
 
 ```bash
-git clone https://github.com/choaticpixels/wicked-brain && cd wicked-brain
+git clone https://github.com/WickedAPI/wicked-brain && cd wicked-brain
 export WICKED_BRAIN_VAULT_PATH=/path/to/your/vault
 bash scripts/install-antigravity.sh
 ```

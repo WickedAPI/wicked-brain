@@ -8,4 +8,4 @@ A plain-markdown memory vault your agents share. This is the Codex plugin build.
 - **Needs:** `uv` on your PATH (https://docs.astral.sh/uv/).
 - **Not included on Codex:** automatic recall and auto-sync hooks. Those run on Claude Code only; on Codex use `$brain-find` and `$brain-sync`.
 
-Project home: https://github.com/choaticpixels/wicked-brain
+Project home: https://github.com/WickedAPI/wicked-brain

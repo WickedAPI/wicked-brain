@@ -3,9 +3,9 @@
   "name": "wicked-brain",
   "version": "0.1.0",
   "description": "Plain-markdown memory vault for Codex: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
-  "author": { "name": "Wicked Brain", "url": "https://github.com/choaticpixels/wicked-brain" },
-  "homepage": "https://github.com/choaticpixels/wicked-brain",
-  "repository": "https://github.com/choaticpixels/wicked-brain",
+  "author": { "name": "Wicked Brain", "url": "https://github.com/WickedAPI/wicked-brain" },
+  "homepage": "https://github.com/WickedAPI/wicked-brain",
+  "repository": "https://github.com/WickedAPI/wicked-brain",
   "license": "MIT",
   "keywords": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
   "extensions": {
@@ -19,7 +19,7 @@
         "developerName": "Wicked Brain",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],
-        "websiteURL": "https://github.com/choaticpixels/wicked-brain",
+        "websiteURL": "https://github.com/WickedAPI/wicked-brain",
         "defaultPrompt": [
           "Set up Wicked Brain with my vault.",
           "What do we know about this project?",

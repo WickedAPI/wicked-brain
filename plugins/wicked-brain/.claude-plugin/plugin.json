@@ -3,9 +3,9 @@
   "displayName": "Wicked Brain",
   "version": "0.1.0",
   "description": "A fast, file-based memory vault shared between Claude Code and Codex CLI - search, save, and maintain a plain-markdown memory of projects, entities, decisions, sessions, and concepts, with atomic writes, bi-temporal facts, duplicate detection, and bounded proactive recall.",
-  "author": { "name": "Wicked Brain", "url": "https://github.com/choaticpixels/wicked-brain" },
-  "homepage": "https://github.com/choaticpixels/wicked-brain",
-  "repository": "https://github.com/choaticpixels/wicked-brain",
+  "author": { "name": "Wicked Brain", "url": "https://github.com/WickedAPI/wicked-brain" },
+  "homepage": "https://github.com/WickedAPI/wicked-brain",
+  "repository": "https://github.com/WickedAPI/wicked-brain",
   "license": "MIT",
   "keywords": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
   "userConfig": {

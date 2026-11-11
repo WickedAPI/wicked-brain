@@ -12,7 +12,7 @@ CC_PLATFORM="claude-code"
 # (Claude Code only offers a plugin update when this string changes).
 CC_VERSION="$(sed -n 's/^version *= *"\([^"]*\)".*/\1/p' "${BASH_SOURCE[0]%/*}/../../pyproject.toml" | head -n1)"
 CC_VERSION="${CC_VERSION:-0.0.0}"
-CC_REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/choaticpixels/wicked-brain}"
+CC_REPO_URL="${WICKED_BRAIN_REPO_URL:-https://github.com/WickedAPI/wicked-brain}"
 
 # adapter_build <src_root> <dst_root>
 #
