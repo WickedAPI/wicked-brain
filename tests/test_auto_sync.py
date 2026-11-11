@@ -111,7 +111,13 @@ def _fake_run(stdout="", stderr="", returncode=0, record=None):
 def test_windows_sync_runs_in_a_hidden_console_that_ignores_ctrl_c(tmp_path, monkeypatch):
     """A detached child has no console, so uv/git would each pop up a visible window the user could
     close or Ctrl-C mid-sync. The child must get a hidden console instead, in its own process group."""
-    monkeypatch.setattr(auto_sync.os, "name", "nt")
+    # Swap in a stand-in os that reports "nt". Patching os.name itself would make pathlib build
+    # WindowsPath objects, which cannot exist on Linux and broke this test in CI.
+    class _NtOs:
+        name = "nt"
+        def __getattr__(self, attr):
+            return getattr(os, attr)
+    monkeypatch.setattr(auto_sync, "os", _NtOs())
     seen = []
     auto_sync.child_main("x", env=_env(tmp_path), run=_fake_run(stdout="{}", record=seen))
     flags = seen[0][1]["creationflags"]

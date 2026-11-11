@@ -140,6 +140,8 @@ def test_codex_plugin_has_one_skill_per_command_and_no_claude_leftovers(tree):
 # --------------------------------------------------------------------------- #
 
 def test_public_export_leaves_out_private_files_and_passes_its_leak_scan():
+    if not (REPO_ROOT / "scripts" / "export-public.sh").is_file():
+        pytest.skip("maintainer-only: the export script is not shipped in the public repo")
     out_rel = "dist/public-test"
     out = REPO_ROOT / out_rel
     shutil.rmtree(out, ignore_errors=True)
