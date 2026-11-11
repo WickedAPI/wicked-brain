@@ -1,0 +1,12 @@
+{
+  "name": "wicked-brain",
+  "interface": { "displayName": "Wicked Brain" },
+  "plugins": [
+    {
+      "name": "wicked-brain",
+      "source": { "source": "local", "path": "./plugins/wicked-brain-codex" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

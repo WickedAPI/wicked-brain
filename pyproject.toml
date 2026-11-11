@@ -1,0 +1,31 @@
+[project]
+name = "wicked-brain"
+version = "0.1.0"
+description = "A fast, file-based, cross-agent (Claude Code, Codex CLI, Google Antigravity) memory vault - forked and trimmed from obsidian-second-brain"
+requires-python = ">=3.10"
+dependencies = [
+    "pyyaml>=6",
+    "mcp>=1.0,<2",
+    "fastapi>=0.110",
+    "uvicorn>=0.30",
+    "sqlalchemy>=2.0",       # sync_server/db.py - one schema, sqlite (tests/local) or Postgres (Railway)
+    "psycopg[binary]>=3.1",  # Postgres driver for sync_server in production
+    "cryptography>=42",      # scripts/vault_crypto.py - Phase 3 client-side encryption
+    "sentry-sdk[fastapi]>=2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F", "I", "PTH"]

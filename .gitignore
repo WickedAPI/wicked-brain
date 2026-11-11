@@ -1,0 +1,45 @@
+# Build output
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.uv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.coverage
+htmlcov/
+
+# Vault runtime state (appears if a vault is ever nested under this repo)
+.claude-runs/
+.claude-lock
+.memory-semantic-index.json
+.obsidian-semantic-index.json
+.sync-state.json
+.sync-salt
+
+# sync_server local dev database
+sync_server/*.db
+*.sqlite
+*.sqlite3
+
+# Secrets and local config: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*
+*secrets*
+.claude/settings.local.json
+.codex/config.toml
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.bak
+*.log

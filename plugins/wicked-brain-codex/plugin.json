@@ -1,0 +1,31 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "wicked-brain",
+  "version": "0.1.0",
+  "description": "Plain-markdown memory vault for Codex: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
+  "author": { "name": "Wicked Brain", "url": "https://github.com/choaticpixels/wicked-brain" },
+  "homepage": "https://github.com/choaticpixels/wicked-brain",
+  "repository": "https://github.com/choaticpixels/wicked-brain",
+  "license": "MIT",
+  "keywords": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "onboardingSkill": "./skills/brain-setup/SKILL.md",
+      "interface": {
+        "displayName": "Wicked Brain",
+        "shortDescription": "A plain-markdown memory vault for your agents",
+        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that Claude Code, Codex and Antigravity can all share. Runs entirely on your machine; optional end-to-end-encrypted sync.",
+        "developerName": "Wicked Brain",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "websiteURL": "https://github.com/choaticpixels/wicked-brain",
+        "defaultPrompt": [
+          "Set up Wicked Brain with my vault.",
+          "What do we know about this project?",
+          "Save what we decided today to my vault."
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "name": "wicked-brain",
+  "displayName": "Wicked Brain",
+  "version": "0.1.0",
+  "description": "A fast, file-based memory vault shared between Claude Code and Codex CLI - search, save, and maintain a plain-markdown memory of projects, entities, decisions, sessions, and concepts, with atomic writes, bi-temporal facts, duplicate detection, and bounded proactive recall.",
+  "author": { "name": "Wicked Brain", "url": "https://github.com/choaticpixels/wicked-brain" },
+  "homepage": "https://github.com/choaticpixels/wicked-brain",
+  "repository": "https://github.com/choaticpixels/wicked-brain",
+  "license": "MIT",
+  "keywords": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
+  "userConfig": {
+    "vault_path": {
+      "type": "directory",
+      "title": "Vault location",
+      "description": "Where your Wicked Brain memory vault lives (or should be created), e.g. C:/Users/you/Vault. Run /brain-init after setup if this is a brand-new path.",
+      "required": true
+    },
+    "recall_enabled": {
+      "type": "boolean",
+      "title": "Proactive recall",
+      "description": "Inject a small brief (max 4 notes, ~900 chars) of relevant vault notes into prompts, in every project, on a confident match. Fail-closed and silent otherwise; every decision is logged to <vault>/.claude-runs/recall-YYYY-MM-DD.jsonl.",
+      "default": true
+    },
+    "bg_agent_enabled": {
+      "type": "boolean",
+      "title": "Background auto-save after compaction",
+      "description": "TRUST CAVEAT: runs an unattended headless agent (filesystem tools only - no Bash, no network) after each conversation compacts, to propagate what happened into the vault. Off by default - turn on only once you trust it.",
+      "default": false
+    },
+    "auto_sync_enabled": {
+      "type": "boolean",
+      "title": "Auto-sync vault (backup)",
+      "description": "Automatically run /brain-sync in the background on session start, after compaction, and at session end, so your vault is backed up off this machine without you remembering to. Needs the three sync fields below. Failures and conflicts are reported at the next session start. Off by default.",
+      "default": false
+    },
+    "sync_url": {
+      "type": "string",
+      "title": "Sync server URL (optional)",
+      "description": "For cross-device sync via /brain-sync. Leave blank if you only use one device.",
+      "required": false
+    },
+    "sync_token": {
+      "type": "string",
+      "title": "Sync token (optional)",
+      "description": "Bearer token for the sync server.",
+      "sensitive": true,
+      "required": false
+    },
+    "sync_passphrase": {
+      "type": "string",
+      "title": "Sync passphrase (optional)",
+      "description": "Encrypts vault content client-side before it ever leaves this device - only you know it, never sent to the sync server.",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
+}

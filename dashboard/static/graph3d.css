@@ -1,0 +1,192 @@
+/* graph3d.css - the ported "Advanced Graph View" nebula panel styling.
+   Everything is scoped under #graph3d-wrap (including the universal reset
+   the original standalone page applied to html/body) so it can't leak into
+   the rest of the dashboard - this view sits inside our own shell, it
+   doesn't replace it. All classes carry a g3d- prefix for the same reason,
+   even where a bare name wouldn't actually have collided. */
+
+#graph3d-wrap {
+  --g3d-bg-panel: rgba(18, 18, 24, 0.78);
+  --g3d-bg-panel-hover: rgba(26, 26, 36, 0.85);
+  --g3d-bg-input: rgba(14, 14, 20, 0.85);
+  --g3d-border-subtle: rgba(255, 255, 255, 0.08);
+  --g3d-border-focus: rgba(168, 139, 250, 0.5);
+  --g3d-accent: #8b5cf6;
+  --g3d-accent-glow: rgba(139, 92, 246, 0.4);
+  --g3d-text: #dcddde;
+  --g3d-text-muted: #8e8ea0;
+  --g3d-text-faint: #565666;
+  --g3d-text-hi: #ffffff;
+
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 130px);
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: #07070d;
+  color: var(--g3d-text);
+  font-size: 12px;
+}
+
+#graph3d-wrap * {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#graph3d-canvas-container {
+  position: absolute; inset: 0;
+}
+#graph3d-canvas-container canvas { display: block; }
+
+.g3d-interactive { pointer-events: auto; }
+
+/* ---- Advanced Graph View panel ---- */
+.g3d-sidebar-panel {
+  position: absolute; top: 14px; left: 14px;
+  width: 240px; max-height: calc(100% - 28px);
+  background: var(--g3d-bg-panel);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--g3d-border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex; flex-direction: column; overflow: hidden;
+  z-index: 25;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.g3d-sidebar-panel.g3d-collapsed { transform: translateX(-260px); opacity: 0; pointer-events: none; }
+
+.g3d-sidebar-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border-bottom: 1px solid var(--g3d-border-subtle);
+  font-weight: 600; font-size: 12px; color: var(--g3d-text); letter-spacing: 0.2px;
+}
+.g3d-sidebar-header-title { display: flex; align-items: center; gap: 6px; }
+.g3d-sidebar-minimize { background: transparent; border: none; color: var(--g3d-text-muted); cursor: pointer; padding: 2px; border-radius: 3px; line-height: 1; }
+.g3d-sidebar-minimize:hover { color: var(--g3d-text-hi); }
+
+.g3d-sidebar-body {
+  overflow-y: auto; overflow-x: hidden; padding: 8px 12px 14px;
+  scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+.g3d-sidebar-body::-webkit-scrollbar { width: 4px; }
+.g3d-sidebar-body::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 2px; }
+
+.g3d-section { margin-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); padding-bottom: 8px; }
+.g3d-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.g3d-section-title {
+  font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--g3d-text-faint); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; cursor: pointer;
+}
+.g3d-section-title::before { content: '▾'; display: inline-block; font-size: 8px; transition: transform 0.15s; }
+.g3d-section.g3d-closed .g3d-section-title::before { transform: rotate(-90deg); }
+.g3d-section.g3d-closed .g3d-section-content { display: none; }
+.g3d-section-content { display: flex; flex-direction: column; gap: 8px; }
+
+.g3d-control-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.g3d-control-label { font-size: 11px; color: var(--g3d-text-muted); flex-shrink: 0; }
+.g3d-control-select {
+  background: var(--g3d-bg-input); border: 1px solid var(--g3d-border-subtle); border-radius: 4px;
+  color: var(--g3d-text); padding: 3px 6px; font-size: 10.5px; font-family: inherit;
+  outline: none; cursor: pointer; width: 120px; transition: border-color 0.15s;
+}
+.g3d-control-select:focus { border-color: var(--g3d-border-focus); }
+.g3d-filter-input { width: 100%; }
+
+.g3d-slider-container { display: flex; flex-direction: column; gap: 4px; margin-top: 2px; }
+.g3d-slider-header { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--g3d-text-muted); }
+.g3d-slider-val { font-variant-numeric: tabular-nums; color: var(--g3d-text); }
+
+#graph3d-wrap input[type="range"] {
+  -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+  background: rgba(255, 255, 255, 0.12); border-radius: 2px; outline: none; cursor: pointer;
+}
+#graph3d-wrap input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%;
+  background: #ffffff; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5); cursor: pointer;
+}
+
+.g3d-checkbox-row { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.g3d-custom-checkbox {
+  appearance: none; -webkit-appearance: none; width: 13px; height: 13px;
+  border: 1px solid var(--g3d-border-subtle); background: var(--g3d-bg-input); border-radius: 3px;
+  cursor: pointer; display: grid; place-content: center;
+}
+.g3d-custom-checkbox:checked { background: var(--g3d-accent); border-color: var(--g3d-accent); }
+.g3d-custom-checkbox:checked::before { content: "\2714"; color: white; font-size: 9px; font-weight: bold; }
+
+.g3d-cluster-legend-row { display: flex; align-items: center; gap: 6px; font-size: 10.5px; color: var(--g3d-text-muted); }
+.g3d-cluster-swatch { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+.g3d-panel-toggle-btn {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--g3d-bg-panel); border: 1px solid var(--g3d-border-subtle); color: var(--g3d-text-muted);
+  border-radius: 6px; padding: 6px 10px; font-size: 11px; cursor: pointer;
+  display: none; align-items: center; gap: 6px; z-index: 24;
+}
+.g3d-panel-toggle-btn:hover { color: var(--g3d-text-hi); background: var(--g3d-bg-panel-hover); }
+
+/* ---- Hover tooltip ---- */
+#graph3d-tooltip {
+  position: absolute; pointer-events: none;
+  background: rgba(14, 14, 20, 0.92);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 6px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 16px var(--g3d-accent-glow);
+  z-index: 100; opacity: 0; transform: translate(-50%, -120%);
+  transition: opacity 0.15s ease, transform 0.15s ease; min-width: 170px;
+}
+#graph3d-tooltip.g3d-visible { opacity: 1; transform: translate(-50%, calc(-100% - 14px)); }
+.g3d-tooltip-title { font-weight: 600; font-size: 12px; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.g3d-tooltip-badge { font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: normal; text-transform: uppercase; }
+.g3d-tooltip-stats { display: grid; grid-template-columns: auto auto; gap: 3px 12px; font-size: 10.5px; color: var(--g3d-text-muted); }
+.g3d-tooltip-stat-val { color: var(--g3d-text); font-weight: 500; }
+
+/* ---- Note inspector drawer ---- */
+.g3d-inspector-drawer {
+  position: absolute; top: 14px; right: 14px;
+  width: 280px; max-height: calc(100% - 28px);
+  background: var(--g3d-bg-panel);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--g3d-border-subtle); border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+  display: flex; flex-direction: column; overflow: hidden; z-index: 30;
+  transform: translateX(300px); opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s;
+}
+.g3d-inspector-drawer.g3d-open { transform: translateX(0); opacity: 1; }
+.g3d-inspector-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--g3d-border-subtle); }
+.g3d-inspector-note-title { font-size: 13px; font-weight: 600; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.g3d-inspector-close { background: transparent; border: none; color: var(--g3d-text-muted); cursor: pointer; font-size: 14px; padding: 2px 4px; }
+.g3d-inspector-close:hover { color: white; }
+.g3d-inspector-body { padding: 14px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+.g3d-inspector-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.g3d-inspector-tag { background: rgba(139, 92, 246, 0.15); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+.g3d-inspector-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--g3d-text-faint); letter-spacing: 0.5px; margin-top: 4px; }
+.g3d-link-pill-list { display: flex; flex-direction: column; gap: 4px; max-height: 140px; overflow-y: auto; }
+.g3d-link-pill-item { background: rgba(255, 255, 255, 0.04); padding: 4px 8px; border-radius: 4px; font-size: 11px; color: var(--g3d-text); cursor: pointer; display: flex; justify-content: space-between; transition: background 0.12s; }
+.g3d-link-pill-item:hover { background: rgba(139, 92, 246, 0.2); color: #fff; }
+.g3d-btn-primary { background: var(--g3d-accent); border: none; color: #fff; font-size: 11px; padding: 6px 10px; border-radius: 4px; cursor: pointer; font-weight: 500; width: 100%; }
+.g3d-btn-primary:hover { opacity: 0.9; }
+
+/* ---- Bottom dock ---- */
+.g3d-bottom-dock {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; font-size: 11px; color: var(--g3d-text-muted); z-index: 20;
+}
+.g3d-dock-stats { background: var(--g3d-bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--g3d-border-subtle); border-radius: 6px; padding: 4px 10px; display: flex; align-items: center; gap: 12px; }
+.g3d-dock-stat-item { display: flex; gap: 4px; }
+.g3d-dock-stat-val { color: #fff; font-weight: 500; }
+.g3d-dock-actions { display: flex; gap: 6px; }
+.g3d-dock-btn {
+  background: var(--g3d-bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--g3d-border-subtle); color: var(--g3d-text); border-radius: 6px;
+  padding: 5px 10px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-size: 11px;
+}
+.g3d-dock-btn:hover { background: var(--g3d-bg-panel-hover); color: #fff; border-color: rgba(255, 255, 255, 0.15); }
+.g3d-dock-btn.g3d-active { background: rgba(139, 92, 246, 0.25); border-color: rgba(139, 92, 246, 0.5); color: #c4b5fd; }
+
+#graph3d-wrap .g3d-empty { color: var(--g3d-text-faint); font-size: 12px; padding: 40px; text-align: center; }
