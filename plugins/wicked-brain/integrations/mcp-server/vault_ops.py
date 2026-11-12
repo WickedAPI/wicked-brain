@@ -1144,7 +1144,7 @@ def save_note(
                 return {
                     "error": (
                         f"a note already exists at {target.relative_to(vault).as_posix()}; "
-                        "use obsidian_update_note to append to it, or save under a different title"
+                        "use brain_update_note to append to it, or save under a different title"
                     )
                 }
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -1535,14 +1535,14 @@ def get_skill(name: str) -> Dict[str, Any]:
     meta, body = _parse_command(md)
     note = (
         "Run this skill using the MCP tools on this server for vault I/O: "
-        "obsidian_search (find/recall), obsidian_read_note (paginated read to EOF), "
-        "obsidian_backlinks (graph), "
-        "obsidian_update_note (append to, or set frontmatter on, an EXISTING note - "
+        "brain_search (find/recall), brain_read_note (paginated read to EOF), "
+        "brain_backlinks (graph), "
+        "brain_update_note (append to, or set frontmatter on, an EXISTING note - "
         "use this whenever a step says update, rewrite, or integrate), "
-        "obsidian_replace_text (exact guarded patch of an EXISTING note), "
-        "obsidian_move_note (graduate an Inbox note without overwriting), "
-        "obsidian_save_note / obsidian_capture (create a NEW note, with optional path), "
-        "obsidian_validate_note (check a note before or after a write). "
+        "brain_replace_text (exact guarded patch of an EXISTING note), "
+        "brain_move_note (graduate an Inbox note without overwriting), "
+        "brain_save_note / brain_capture (create a NEW note, with optional path), "
+        "brain_validate_note (check a note before or after a write). "
         "For broad rewrites, use multiple exact patches or report that the operation "
         "needs direct filesystem access; never approximate it with a duplicate note. "
         "Follow the steps below."
