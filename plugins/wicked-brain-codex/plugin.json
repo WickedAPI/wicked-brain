@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wicked-brain",
   "version": "0.1.0",
-  "description": "Plain-markdown memory vault for Codex: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
+  "description": "Plain-markdown memory vault for your AI agent: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
   "author": { "name": "SimpliFixed Technologies, LLC", "url": "https://github.com/WickedAPI/wicked-brain" },
   "homepage": "https://github.com/WickedAPI/wicked-brain",
   "repository": "https://github.com/WickedAPI/wicked-brain",
@@ -15,7 +15,7 @@
       "interface": {
         "displayName": "Wicked Brain",
         "shortDescription": "Memory vault for your agents",
-        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that Claude Code, Codex and Antigravity can all share. Runs entirely on your machine, with no account and no telemetry. Needs the free uv tool installed. Optional end-to-end-encrypted sync to a server you run.",
+        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that all of your AI agents can share. Runs entirely on your machine, with no account and no telemetry. Needs the free uv tool installed. Optional end-to-end-encrypted sync to a server you run.",
         "developerName": "SimpliFixed Technologies, LLC",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],

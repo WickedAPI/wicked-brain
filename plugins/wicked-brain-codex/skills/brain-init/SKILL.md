@@ -1,6 +1,6 @@
 ---
 name: brain-init
-description: "Bootstrap a new memory vault - fixed folder structure, operating manuals for both Claude Code and Codex CLI, index.md, CRITICAL_FACTS.md Triggers: init memory, bootstrap vault, set up my memory, create a new vault. Use only when the user explicitly asks for it."
+description: "Bootstrap a new memory vault - fixed folder structure, operating manuals for your AI agents, index.md, CRITICAL_FACTS.md Triggers: init memory, bootstrap vault, set up my memory, create a new vault. Use only when the user explicitly asks for it."
 ---
 
 > **Plugin root.** This skill ships inside the Wicked Brain plugin. `<plugin-root>` means the folder two levels above this `SKILL.md` (the folder that contains `skills/`, `references/` and `scripts/`). Resolve every `<plugin-root>/...` path below from this file's own location. The vault itself is wherever `WICKED_BRAIN_VAULT_PATH` (or `~/.config/wicked-brain/.env`) points; if neither is set, run `$brain-setup` first.

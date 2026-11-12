@@ -97,3 +97,18 @@ def test_every_mcp_tool_declares_explicit_safety_hints():
         assert by[edit].readOnlyHint is False and by[edit].destructiveHint is True, edit
     for add in ("brain_save_note", "brain_capture"):
         assert by[add].readOnlyHint is False and by[add].destructiveHint is False, add
+
+
+def test_the_check_rejects_a_listing_that_names_another_ai_platform(package, tmp_path):
+    zpath = package / f"wicked-brain-{_version()}.zip"
+    zipfile.ZipFile(zpath).extractall(tmp_path)
+    manifest = tmp_path / "plugin.json"
+    m = json.loads(manifest.read_text(encoding="utf-8"))
+    ok = subprocess.run([sys.executable, str(REPO_ROOT / "scripts" / "check_submission.py"), str(tmp_path)],
+                        capture_output=True, text=True)
+    assert ok.returncode == 0, ok.stdout  # the shipped listing names no other platform
+    m["description"] = "A memory vault for Claude Code"
+    manifest.write_text(json.dumps(m), encoding="utf-8")
+    bad = subprocess.run([sys.executable, str(REPO_ROOT / "scripts" / "check_submission.py"), str(tmp_path)],
+                         capture_output=True, text=True)
+    assert bad.returncode == 1 and "other AI platforms" in bad.stdout

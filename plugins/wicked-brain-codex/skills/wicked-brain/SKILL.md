@@ -1,6 +1,6 @@
 ---
 name: wicked-brain
-description: "Operating rules for the user's Wicked Brain memory vault (plain-markdown notes shared by Claude Code, Codex and Antigravity). Use whenever the task is to recall, save, or maintain notes about projects, decisions, people, sessions or concepts, or when a $brain-* skill is invoked."
+description: "Operating rules for the user's Wicked Brain memory vault (plain-markdown notes shared by your AI agents). Use whenever the task is to recall, save, or maintain notes about projects, decisions, people, sessions or concepts, or when a $brain-* skill is invoked."
 ---
 
 > **Plugin root.** This skill ships inside the Wicked Brain plugin. `<plugin-root>` means the folder two levels above this `SKILL.md` (the folder that contains `skills/`, `references/` and `scripts/`). Resolve every `<plugin-root>/...` path below from this file's own location. The vault itself is wherever `WICKED_BRAIN_VAULT_PATH` (or `~/.config/wicked-brain/.env`) points; if neither is set, run `$brain-setup` first.

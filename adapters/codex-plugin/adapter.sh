@@ -61,6 +61,7 @@ _cp_emit_skills() {
 
     name="$(basename "$f" .md)"
     desc="$(parse_frontmatter "$f" description)"
+    desc="${desc//operating manuals for both Claude Code and Codex CLI/operating manuals for your AI agents}"
     triggers="$(parse_frontmatter "$f" triggers_en)"
     trigmode="$(parse_frontmatter "$f" trigger-mode)"
     [[ -z "$desc" ]] && desc="Run the $name command of the wicked-brain skill."
@@ -104,7 +105,7 @@ _cp_emit_umbrella_skill() {
   {
     echo "---"
     echo "name: wicked-brain"
-    printf 'description: "%s"\n' "Operating rules for the user's Wicked Brain memory vault (plain-markdown notes shared by Claude Code, Codex and Antigravity). Use whenever the task is to recall, save, or maintain notes about projects, decisions, people, sessions or concepts, or when a \$brain-* skill is invoked."
+    printf 'description: "%s"\n' "Operating rules for the user's Wicked Brain memory vault (plain-markdown notes shared by your AI agents). Use whenever the task is to recall, save, or maintain notes about projects, decisions, people, sessions or concepts, or when a \$brain-* skill is invoked."
     echo "---"
     echo
     echo "$CP_ROOT_NOTE"
@@ -176,7 +177,7 @@ _cp_copy_mcp_server() {
 _cp_emit_manifests() {
   local dst="$1"
   mkdir -p "$dst/.codex-plugin"
-  local desc="Plain-markdown memory vault for Codex: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync."
+  local desc="Plain-markdown memory vault for your AI agent: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync."
 
   # Portable manifest (root). Mirrors the SearchLight plugin that is installed and working.
   cat > "$dst/plugin.json" <<EOF
@@ -197,7 +198,7 @@ _cp_emit_manifests() {
       "interface": {
         "displayName": "Wicked Brain",
         "shortDescription": "Memory vault for your agents",
-        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that Claude Code, Codex and Antigravity can all share. Runs entirely on your machine, with no account and no telemetry. Needs the free uv tool installed. Optional end-to-end-encrypted sync to a server you run.",
+        "longDescription": "Recall and save notes about your projects, decisions and people in a local markdown vault that all of your AI agents can share. Runs entirely on your machine, with no account and no telemetry. Needs the free uv tool installed. Optional end-to-end-encrypted sync to a server you run.",
         "developerName": "SimpliFixed Technologies, LLC",
         "category": "Productivity",
         "capabilities": ["Read", "Write"],

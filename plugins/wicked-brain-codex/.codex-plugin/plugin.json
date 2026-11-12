@@ -1,7 +1,7 @@
 {
   "name": "wicked-brain",
   "version": "0.1.0",
-  "description": "Plain-markdown memory vault for Codex: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
+  "description": "Plain-markdown memory vault for your AI agent: recall, save and maintain notes about projects, decisions, sessions and concepts, with ranked search, duplicate detection, freshness checks and optional encrypted cross-device sync.",
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "requires_local_executor": true,
