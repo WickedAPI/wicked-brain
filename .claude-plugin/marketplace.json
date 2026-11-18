@@ -3,14 +3,14 @@
   "owner": { "name": "SimpliFixed Technologies, LLC", "url": "https://github.com/WickedAPI/wicked-brain" },
   "metadata": {
     "description": "Wicked Brain: a fast, plain-markdown memory vault that Claude Code, Codex CLI and Google Antigravity share.",
-    "version": "0.1.0"
+    "version": "0.1.1"
   },
   "plugins": [
     {
       "name": "wicked-brain",
       "source": "./plugins/wicked-brain",
       "description": "Plain-markdown memory vault: search, save and maintain projects, decisions, sessions and concepts, with proactive recall, atomic writes, duplicate detection and optional encrypted cross-device sync.",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "category": "productivity",
       "tags": ["memory", "vault", "notes", "second-brain", "knowledge-base"],
       "homepage": "https://github.com/WickedAPI/wicked-brain"

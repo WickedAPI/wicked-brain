@@ -1,6 +1,6 @@
 [project]
 name = "wicked-brain"
-version = "0.1.0"
+version = "0.1.1"
 description = "A fast, file-based, cross-agent (Claude Code, Codex CLI, Google Antigravity) memory vault - forked and trimmed from obsidian-second-brain"
 requires-python = ">=3.10"
 dependencies = [

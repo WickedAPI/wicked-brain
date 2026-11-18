@@ -50,7 +50,7 @@ def test_zip_has_one_manifest_format_an_icon_and_the_local_server(package):
     assert not [n for n in names if n.startswith((".codex-plugin", "hooks/")) or n == ".mcp.json"]
     assert not [n for n in names if "__pycache__" in n or n.endswith(".pyc")]
     assert not [n for n in names if n.startswith("scripts/") and Path(n).name in
-                {"export-public.sh", "package-submission.sh", "check_submission.py", "build.sh", "lib.sh"}]
+                {"export-public.sh", "package-submission.sh", "build-pypi.sh", "check_submission.py", "build.sh", "lib.sh"}]
     digest = (package / f"wicked-brain-{_version()}.zip.sha256").read_text().split()[0]
     assert digest == hashlib.sha256(zpath.read_bytes()).hexdigest()
 
@@ -97,6 +97,16 @@ def test_every_mcp_tool_declares_explicit_safety_hints():
         assert by[edit].readOnlyHint is False and by[edit].destructiveHint is True, edit
     for add in ("brain_save_note", "brain_capture"):
         assert by[add].readOnlyHint is False and by[add].destructiveHint is False, add
+
+
+def test_server_reports_the_plugin_version_and_tool_text_names_no_other_product():
+    sys.path.insert(0, str(REPO_ROOT / "integrations" / "mcp-server"))
+    import server  # noqa: PLC0415
+
+    assert server.SERVER_VERSION == _version()
+    assert server.mcp._mcp_server.version == _version()
+    for t in asyncio.run(server.mcp.list_tools()):
+        assert "obsidian" not in (t.description or "").lower(), t.name
 
 
 def test_the_check_rejects_a_listing_that_names_another_ai_platform(package, tmp_path):

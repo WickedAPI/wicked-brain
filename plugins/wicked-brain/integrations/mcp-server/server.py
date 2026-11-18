@@ -2,7 +2,7 @@
 
 Exposes the vault as a set of MCP tools so any MCP client - Hermes Agent (via
 `discover_mcp_tools()`), Claude Desktop, Claude Code, Cursor - can search, read,
-and add notes to an Obsidian vault. This is the "second brain as a tool" connector
+and add notes to a markdown vault. This is the "second brain as a tool" connector
 (GitHub Issue #60): it does NOT touch the agent's own memory; it gives the agent a
 doorway into the knowledge vault.
 
@@ -51,7 +51,15 @@ import vault_ops  # noqa: E402
 from mcp.server.fastmcp import FastMCP  # noqa: E402
 from mcp.types import ToolAnnotations  # noqa: E402
 
+# Keep equal to pyproject.toml's version (tests/test_submission.py pins them together).
+# Reported to clients as serverInfo.version; without it FastMCP reports the MCP SDK's version.
+SERVER_VERSION = "0.1.1"
+
 mcp = FastMCP("wicked-brain")
+try:
+    mcp._mcp_server.version = SERVER_VERSION
+except AttributeError:  # a future SDK layout: the default version is merely less informative
+    pass
 
 # Every tool declares what it can do, so a host can show an accurate confirmation prompt.
 # All tools stay inside the user's own vault folder (never the network): openWorld is false.
@@ -64,7 +72,7 @@ EDITS_EXISTING = ToolAnnotations(readOnlyHint=False, destructiveHint=True, idemp
 
 @mcp.tool(annotations=READ_ONLY)
 def brain_search(query: str, limit: int = 6) -> str:
-    """Search the Obsidian vault for relevant notes.
+    """Search the markdown memory vault for relevant notes.
 
     Returns ranked matches with a snippet and the vault-relative path of each
     note (pass that path to brain_read_note to read the whole note).
